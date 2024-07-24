@@ -1,0 +1,113 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+ .top_blok{
+    width: 100%;
+    background-color: rgb(24, 24, 232);
+    height: 100px;
+    text-align: center;
+    border-bottom: solid 1px;
+}
+.text_top_block{
+    display: flex;
+    justify-content:space-between;
+    padding-top: 50px;
+    margin-left: 55px;
+    margin-right: 110px;
+
+}
+img{
+    height: 25px;
+    width: 25px;
+
+}
+.main_site{
+    display: flex;
+}
+.div_blok_regist{
+    background-color: 	rgb(107, 102, 102);
+    width: 25%;
+    display: flex;
+    height: 800px;
+    align-items: center;
+    border-right: solid 1px;
+}
+.about{
+    display:block;
+    text-align: center;
+    line-height: 4em;
+
+    background-color:	rgb(204, 28, 28);
+    height: 35%;
+    width: 60%;
+    margin-left: 20%;
+    border: solid 1px;
+}
+.text_div_block_regist{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(200,200,200);
+    height: 25%;
+    width: 60%;
+    margin-left: 20%;
+    border: solid 1px;
+}
+
+.text_div_block_regist>ul{
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+.acquaintance{
+    width: 100%;
+}
+.acquaintance>h1{
+    text-align: center;
+}
+.basement{
+    background-color: rgb(248, 243, 243);
+    border-top: solid 1px;
+    text-align: center;
+    height: 100px;
+}
+.all_user{
+    display: flex;
+    flex-wrap: wrap;
+}
+.one_user{
+    height: 250px;
+    width: 250px;
+    display: block;
+    border: solid 1px;
+    justify-content: space-between;
+    margin-left: 100px;
+    text-align: center;
+    line-height: 3em;
+    background-color:  rgb(24, 24, 232);
+    margin-top: 30px;
+}
+.one_user>ul>img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.search{
+    width: 500px;
+    line-height: 3em;
+    margin: auto;
+}
+.you{
+    height: 250px;
+    width: 250px;
+    display: block;
+    border: solid 1px;
+    justify-content: center;
+    margin-left: 100px;
+    text-align: center;
+    line-height: 3em;
+    background-color:  rgb(24, 24, 232);
+    margin-top: 30px;
+}

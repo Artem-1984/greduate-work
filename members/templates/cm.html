@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/st_cm5.css'%}" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="top_blok">
+        <div class="text_top_block" >
+          
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+            
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="blog_block">
+        <div class = 'all_block'>
+                <div class = 'one_user'>
+                    <div class='user_image'>
+                        <ul> <img src=" {{one_acticle.user.image.url}}"></ul>
+                        <ul><a href = "/{{one_acticle.user.id}}" class = 'user'>{{one_acticle.user.username}}</a></ul>
+                        <ul>{{one_acticle.date}}</ul>
+                        <hr>
+                        <ul>Лайки: {{acticle_likes}}</ul>
+                        <ul>Лайкнули:</ul>
+                        {% for i in user_like%}
+                           
+                           <ul><a href = "/{{i.user_like.id}}" class = 'user'> {{i.user_like.username}}</a></ul>
+                        {% endfor%}
+                    </div>
+                    <div class='user_text'>
+                        <h2>{{one_acticle.header}}</h2>
+                        <ul>{{one_acticle.text}}</ul>
+                        
+                        <p>Комментарии:</p>
+                        <hr>
+                        
+                        {% for com in one_acticle.comment_set.all %}
+                            <div class='block_text'>
+                                <ul><a href = "/{{com.user_comments_id}}" class = 'user'>{{com.user_comments.username}}</a>: {{com.text }} <ul class = 'data'>{{ com.date_comment }}</ul>   </ul>
+                                {% if user.setting_user.id == com.user_comments_id  or  user.setting_user.id == com.user.user_id%}
+                                <form method = 'POST'>
+                                    {% csrf_token %}
+                                    <button data-title="удалить" class = 'btm_m' type="submit" value = '{{com.id}}' name = 'garbage' ><img src="{% static 'img/bin_2602735.png' %}" alt="photo"></button>
+                                </form>
+                                {% endif %}
+                            </div>   
+                        {%endfor%}
+                        
+                        
+                    </div>
+                    <div class = 'form-inner'>
+                        <form method = 'POST'>
+                            {% csrf_token %}
+                            <ul><input name = 'user_comments' type='hidden' value ='{{user.setting_user.id}}'></ul>
+                            <ul><input name = 'user' type='hidden' value ='{{one_acticle.id}}'></ul>
+                            <ul>Оставить комментарий: <input name = 'text' type='text'></ul>
+                            <ul><input type='submit'></ul>
+                        </form>
+                        <form method = 'POST'>
+                            {% csrf_token %}
+                            <input type="hidden" name ='blog_like' value='{{one_acticle.id}}'>
+                            <input type="hidden" name ='user_like' value='{{user.setting_user.id}}'>                                
+                            <ul><button type = 'submit' name = 'likes' value=1>Like</button></ul>
+                        </form>
+                        <ul><a href = '/bloger'> Вернуться назад</a></ul>
+                        
+                    </div>
+                </div>
+        </div>
+        
+        
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

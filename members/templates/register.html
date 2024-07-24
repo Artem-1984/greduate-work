@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/register.css'%}" type="text/css">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div class = 'top_blok'>
+        <div class = 'text'>
+            <ul>Сайт знакомств</ul>
+        </div>
+    </div>
+   
+    <div class = 'registr'>
+        <div class = 'forma'>
+            
+            <form method="post">
+                {% csrf_token %}
+                    <div class="form-left-decoration"></div>
+                    <div class="form-right-decoration"></div>
+                    <div class="circle"></div>
+                    <div class="form-inner">
+                    <h3>Регистрация</h3>
+                    <p>Логин:  <input type="text" placeholder="Логин" name = 'username'></p>
+                    <p>E-mail: <input type="email" placeholder="mail" name = 'email'></p>
+                    <p>Пароль: <input type="text" placeholder="Пароль" name ='password'></p>
+                    <p>Подтверждение  пароля: <input type="text" placeholder="Подтверждение  пароля" name = 'password2'></p>
+                    <input type="submit" value="Зарегистрироваться">
+                    </div>
+            </form>
+            {% if error %}
+                <div style="color:red;">{{ error }}</div>
+            {% endif %}
+            <hr />
+            <div class = 'basement'>
+                <a href="/" class="active">Вернуться обратно</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

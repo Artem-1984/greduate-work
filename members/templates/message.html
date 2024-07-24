@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/message.css'%}" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="top_blok">
+        <div class="text_top_block" >
+          
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif %}
+        </div>
+
+    </div>
+    <h1>Сообщения</h1>
+        {% for i in user_mesage%}
+        {{len_message}}
+        <div class = 'form-inner'>
+                {% if  request.user.id == i.received_user.id%}
+
+                    <div class = 'text'>
+                        {% if i in read_user%}
+                             <img class = 'image_read' src="{% static 'img/read.png' %}" alt="photo">
+                        {% endif %}
+                        <ul><img src='{{i.sent_user.setting_user.image.url}}'></ul>
+                        <ul><a href = '/{{i.sent_user.setting_user.id}}'> {{i.sent_user.setting_user.username}}: </a></ul>
+                        
+                        <ul><a href ='/sms/{{i.sent_user.setting_user.id}}/'> {{i.sms}}</a></ul>
+                        <ul>{{i.data_sms}}</ul>
+                    </div>
+                {% elif  request.user.id == i.sent_user.id%}
+
+                    <div class = 'text'>
+
+                        <ul><img src='{{i.received_user.image.url}}'></ul>
+                            <ul><a href = '/{{i.received_user.id}}'>{{i.received_user.username}}: </a></ul>
+                            
+                            <ul><a href ='/sms/{{i.received_user.id}}/'>Вы:{{i.sms}}</a></ul>
+                            <ul>  {{i.data_sms}}</ul>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor%}
+    

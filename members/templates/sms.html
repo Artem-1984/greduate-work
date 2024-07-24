@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/sms_user.css'%}" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="top_blok">
+        <div class="text_top_block" >
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif %}
+    </div>
+    </div>
+    <div class="top" >
+        <ul><img src = '{{one_chat.image.url}}'></ul>
+        <ul><a href = '/{{one_chat.id}}'> {{one_chat.username}}</a></ul>
+    </div>
+    <div class = 'sms_text'>
+    {% for i in chat%}
+            {% if i.sent_user.setting_user.user_id == request.user.id%}
+                <ul class = 'username'>Вы :{{i.sms}}  {{i.data_sms}}
+                <form method='POST'>
+                    {% csrf_token %}
+                    <input type='hidden' value='{{i.id}}' name = 'id'>
+                    <button name = 'del' data-title="удалить"><img src="{% static 'img/bin_2602735.png' %}" alt="photo"></button>
+                </form>
+                </ul>
+            {% else%}
+                <ul class = 'username'>{{i.sent_user.setting_user.username}} : 
+                {{i.sms}}
+                {{i.data_sms}}</ul>    
+            {% endif %}
+    {% endfor%}
+    </div>
+    <div class = 'btn'>
+        <form method = 'POST'>
+            {% csrf_token %}
+            <input type = 'hidden' name = 'sent_user' value = '{{request.user.id}}'>
+            <input type = 'hidden'  name ='received_user' value = '{{one_chat.id}}'>
+            <input type = 'text' class = 'text' name ='sms'>
+            <button type = 'submit'>отправить</button>
+        </form>
+    </div>

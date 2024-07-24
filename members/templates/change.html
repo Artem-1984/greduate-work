@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/change.css'%}" type="text/css">
+    <title>Setting</title>
+</head>
+<body>
+    <div class="top_blok">
+        <div class="text_top_block" >
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+            
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif %}
+        </div>
+
+    </div>
+    <ul><button onclick="history.back();" data-title="назад"> <img src="{% static 'img/free-icon-back-left-arrow-square-button-outline-54921.png' %}" alt="photo"></button></ul>
+
+    {% if  user.is_authenticated %}
+        
+                <form method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-inner">
+                        <h3>Профиль:  {{user.username}}</h3>
+                        <p><input type="hidden" name = 'user' required value = '{{ request.user.id}}'></p> 
+                        <p>Имя:  <input type="text" name = 'username' required  value = '{{user.setting_user.username}}'></p>
+                        <p>Возраст: <input type="text" name = 'age' required  value = '{{user.setting_user.age}}'></p> 
+                        <p>Фамилия:  <input type="text" required name = 'last_name' value = '{{user.setting_user.last_name}}'></p> 
+                        <p>Город: <input type="text" required  name = 'sity' value = '{{user.setting_user.sity}}'></p>
+                        <p>О себе:<textarea  rows="3" name = 'about' value = ''>{{user.setting_user.about}}</textarea></p>
+                    
+                        <p class = 'foto_input'> Добавить фотографию:<br><img src = '{{user.setting_user.image.url}}' class = 'foto'> <input type="file" name = 'image' value ='{{user.setting_user.image.url}}'></p>
+                        <p>Пол М или Ж:<input type = 'text' required name ='floor' value='{{user.setting_user.floor}}'></p>
+                        
+                        <button >Сохранить</button>
+                </form>
+                
+             
+            </div>
+        </div>
+    {%endif%}    

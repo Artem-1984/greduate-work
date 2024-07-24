@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/search.css'%}" type="text/css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="top_blok">
+        <div class="text_top_block" >
+          
+            <ul>Сайт знакомств</ul>
+            
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщение </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'> Блоги</a></ul>
+            <ul> <a href = '/search'><img src="{% static 'img/free-icon-magnifier-2319177 (1).png' %}" alt="photo"></a></ul>
+            {% if  user.is_authenticated %}
+                <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+            {% endif %}
+        </div>
+
+    </div>
+    <div>
+            <div class = 'search'>    
+                <h1>Поиск</h1>
+                <form method='POST'>
+                    {% csrf_token %}
+                    <p>Введите имя: <input type="text" name = 'username'></p>
+                    <p>Введите пол: <input type="text" name = 'floor'></p>
+                    <p>Введите Город: <input type="text" name = 'sity'></p>
+                    <p>Введите Возраст: <input type="text" name = 'age1' value = 18> - <input type="text" name = 'age2' value=99></p>      
+                    <p><input type="submit" value="Найти" name = 'search'></p> 
+                </form>
+            </div>    
+            <div>
+                <div class="main_site">
+        
+                    <div class="acquaintance">
+                        <div class = 'all_user'>
+                            {%for i in post%}
+                            <div class = 'one_user'>
+                                <ul><img src = '{{i.image.url}}'></ul>
+                                <ul><a href = "{{i.id}}" class = 'user'> {{i.username}} </a></ul>
+                                <ul>Возраст: {{i.age}}</ul>
+                            </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+    
+        
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

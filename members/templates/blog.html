@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/article.css'%}" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="top_blok">
+        <div class="text_top_block" >
+          
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+            
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="blogs">
+        
+        <h1>Блог</h1>
+         
+            <form method='POST'>
+                {% csrf_token %}
+                
+                <fieldset>
+                    <div class="form-inner"> 
+                        <ul><p>Сортировка:</p></ul>
+                        <ul><label>Новые  <input type="radio" name = 'new' value='new'></label></ul>
+                        <ul><label>Ваши записи <input type="radio" name = 'new' value='your_entries'> </label></ul>
+                        <ul><label>По названию <input type="text" name = 'text_search'></label></ul>
+                        <ul><button  value="Найти" name = 'search'>Найти</button></p> </ul>
+                    </div>
+                </fieldset>
+                </form>
+        
+        <div class = 'image'>  
+                <a href = '/addblog/{{user.setting_user.id}}'><img src ='{% static 'img/free-icon-add-button-2740600.png' %}' alt = 'photo'></a>
+        </div>    
+        
+    </div>
+    
+        <div class="blog_block">
+            <div class = 'all_block'>
+                {%for i in all%}
+                    <div class = 'one_user'>
+                        <div class='user_image'>
+                           
+                            <ul> <img src=" {{i.user.image.url}}"></ul>
+                            <ul><a href = "{{i.user.id}}" class = 'user'>{{i.user.username}}</a></ul>
+                            <ul>{{i.date}}</ul>
+                        </div>
+                        <div class='user_text'>
+                            
+                            <h2>{{i.header}}</h2>
+                            
+                            <ul class = 'overflow'>{{i.text}}</ul>
+                          
+                            
+                            
+                            <ul><a href = '/cm/{{i.id}}'>Читать</a></ul>
+                            {% if user.setting_user.user_id == i.user.user_id%}
+                            <div class = 'del'>
+                            <form method = 'POST'>
+                                {% csrf_token %}
+                                <button data-title="удалить" class = 'btm_m' type="submit" value = '{{i.id}}' name = 'garbage' ><img src="{% static 'img/bin_2602735.png' %}" alt="photo"></button>
+                            </form>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {%endfor%}
+            </div>
+            
+            
+            
+        </div>
+   
+
+
+
+
+
+
+
+
+
+    
+
+</body>
+</html>

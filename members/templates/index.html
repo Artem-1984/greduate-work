@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style5.css'%}" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="top_blok">
+        <div class="text_top_block" >
+           
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="main_site">
+        <h1>Знакомства</h1>
+        
+        <div class="acquaintance">
+            
+            <div class = 'all'>
+                <div class="form-inner"> 
+                    {% if  user.is_authenticated %}
+                        <ul><a href = "{{request.user.setting_user.id}}" class = 'user'>Ваш профиль: {{request.user.setting_user.username}} </a></ul>
+                    {% endif %}
+                    <h1>Поиск</h1>
+                    <form method='GET'>
+                        {% csrf_token %}
+                        <p>Введите имя: <input type="text" name = 'username'></p>
+                        <p>Введите пол: <input type="text" name = 'floor'></p>
+                        <p>Введите Город: <input type="text" name = 'sity'></p>
+                        <p>Введите Возраст: <input type="text" name = 'min_age' value = 18> - <input type="text" name = 'max_age' value=99></p>
+                        <p><input type="submit" value="Найти" name = 'search'></p>
+                    </form>
+        </div> 
+                
+                
+                    <div class = 'all_user'>
+                        
+                        {%for i in  users.qs%}
+                        {%if request.user.id == i.user.id%}
+                            {{continue}}
+                        {% else %}
+
+                            <div class = 'one_user'>
+
+                                <ul><img src = '{{i.image.url}}'></ul>
+                                {% if  user.is_authenticated %}
+                                    <ul><a href = "{{i.id}}" class = 'user'> {{i.username}} </a></ul>
+                                    <ul>Возраст: {{i.age}}</ul>
+                                {%else%}
+                                    <ul> {{i.username}} </ul>
+                                    <ul>Возраст: {{i.age}}</ul>
+                                {% endif %}
+                                <ul>Город: {{i.sity}}</ul>
+                            </div>
+                        {% endif %}
+                    {%endfor%}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+
+</html>

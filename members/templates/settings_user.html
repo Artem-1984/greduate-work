@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/setting_user.css'%}" type="text/css">
+    <title>Setting</title>
+</head>
+<body>
+        <div class="top_blok">
+
+            <div class="text_top_block" >
+            {% if request.user.setting_user.user_id != request.user.id%}
+                 <ul>Сайт знакомств</ul>
+            {% else %}
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+            
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif%}
+            {% endif %}
+            </div>
+
+        </div>
+    
+        {% if  user.is_authenticated %}
+            {% if request.user.setting_user.user_id != request.user.id%}
+                <form method="post" enctype = "multipart/form-data">
+                    {% csrf_token %}
+                    
+                    
+                    <div class="form-inner">
+                    <h3>Профиль:  {{user.setting_user.username}}</h3>
+                    <p><input type="hidden" name = 'user' required value = '{{ request.user.id}}'></p> 
+                    <p>Имя:  <input type="text" name = 'username' required  value = '{{user.setting_user.username}}'></p>
+                    <p>Возраст: <input type="text" name = 'age' required  value = '{{user.setting_user.age}}'></p> 
+                    <p>Фамилия:  <input type="text" required name = 'last_name' value = '{{user.setting_user.last_name}}'></p> 
+                    <p>Город: <input type="text" required  name = 'sity' value = '{{user.setting_user.sity}}'></p>
+                    <p>О себе:<textarea placeholder="..." rows="3" name = 'about' value = '{{user.setting_user.about}}'></textarea></p>
+                
+                    <p class = 'foto_input'> Добавить фотографию:<br><img src = '{{user.setting_user.image.url}}' class = 'foto'> <input type="file" required name = 'image' value ='{{user.setting_user.image.url}}'></p>
+                    <p>Пол М или Ж:<input type = 'text' required name ='floor' value='{{user.setting_user.floor}}'></p>
+                    
+                    <button >Сохранить</button>
+                    </div>
+                </form>
+                <hr>
+                <div class="basement">
+                </div>
+            {% else %}
+                    
+                    <div class="form-inner_profile">
+                    <h3>Профиль:  {{user.username}}</h3>
+                    <p> <img src = '{{request.user.setting_user.image.url}}' class = 'foto'> </p>
+
+                    <p><input type="hidden" name = 'user' value = '{{ request.user.id}}'></p> 
+                    <p>Имя: {{user.setting_user.username}}</p>
+                    <p>Возраст: {{user.setting_user.age}}</p> 
+                    <p>Фамилия: {{user.setting_user.last_name}}</p> 
+                    <p>Город: {{user.setting_user.sity}}</p>
+                    <p>О себе: {{user.setting_user.about}}</p>
+                    
+                    <p>Пол: {{user.setting_user.floor}}</p>  
+                    <hr>
+                    <div class="basement">
+                        <a href='change/{{request.user.id}}' class = 'change'>Изменить</a>
+                        
+                    </div>
+                    <form method='get'  action = {% url "logout" %} >
+                        <input type = 'submit' value='Выход'>
+                    </form>
+                    </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+                
+            <form method='POST' >
+                {% csrf_token %}
+                    
+                    
+                    <div class="form-left-decoration"></div>
+                    <div class="form-right-decoration"></div>
+                    <div class="circle"></div>
+                    <div class="form-inner">
+                    <h3>Вход</h3>
+                    <p>Логин:  <input type="text" placeholder="Логин" name = 'username'></p>
+                    <p>Пароль: <input type="text" placeholder="Пароль" name ='password'></p>
+                    {% if error %}
+                        <div style="color:red;">{{ error }}</div>
+                    {% endif %}
+                    <button name = 'entrance' class = 'entrance'>Войти</button>
+                    <a href='replay' class = 'link'>Забыли пароль?</a>
+                    </div>
+            </form>
+            <hr>
+            <div class='basement'>
+                <a href='register'>Регистрация</a>
+            </div>    
+            {%endif%}    
+        </div>
+    

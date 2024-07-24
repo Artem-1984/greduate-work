@@ -1,0 +1,127 @@
+*{
+    padding: 0;
+    margin: 0;
+    color: rgb( 128, 128, 128);
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+ul>button{
+    background-color: white;
+    border: solid 0px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
+ul>button:hover::after {
+    content: attr(data-title);
+    border: solid 1px;
+
+}
+ .top_blok{
+    width: 100%;
+    background-color: rgb(38,	37,	45);
+    height: 100px;
+    text-align: center;
+    border-bottom: solid 1px;
+}
+.text_top_block{
+    display: flex;
+    justify-content:space-between;
+    padding-top: 50px;
+    margin-left: 55px;
+    margin-right: 110px;
+
+}
+img{
+    height: 25px;
+    width: 25px;
+
+}
+.form {
+    display: block;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    line-height:2.5em;
+    border: solid 1px;
+    margin-top: 50px;
+
+
+}
+.foto{
+    width: 150px;
+    height: 100px;
+    border-radius: 50%;
+}
+textarea{
+    resize: none;
+	width: 400px;
+	height: 150px;
+}
+.form_add{
+    display: block;
+    width: 500px;
+    margin: auto;
+
+    line-height:2.5em;
+    border: solid 1px;
+    margin-top: 50px;
+    background-color:  rgb(38,	37,	45);
+
+}
+.registr{
+    text-align: center;
+}
+.form_add2{
+    display: block;
+
+
+    border-color: aqua;
+}
+.decor {
+    position: relative;
+    max-width: 400px;
+    margin: 50px auto 0;
+    background: white;
+    border-radius: 30px;
+ }
+
+
+
+ .form-inner {
+    padding: 50px;
+ }
+ .form-inner input, .form-inner textarea {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    background: #E9EFF6;
+    line-height: 40px;
+    border-width: 0;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+ }
+ .form-inner input[type="submit"] {
+    margin-top: 30px;
+    background:rgb(38,	37,	45);;
+    border-bottom: 4px solid rgb(52, 52, 56);;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+ }
+ .form-inner textarea {
+    resize: none;
+ }
+ .form-inner h3 {
+    text-align: center;
+    margin-top: 10px;
+
+    font-weight: 500;
+    font-size: 24px;
+
+ }

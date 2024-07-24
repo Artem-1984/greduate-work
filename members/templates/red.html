@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style15.css'%}" type="text/css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="top_blok">
+        <div class="text_top_block" >
+          
+            {% if  user.is_authenticated %}
+            <ul>Сайт знакомств</ul>
+            
+            <ul ><a href = '/message/{{user.setting_user.id}}'>Сообщения </a></ul>
+            <ul><a href = '/'>Знакомства</a></ul>
+            <ul><a href = '/bloger'>Статьи</a></ul>
+            <ul ><a href = '/settings_user'>Мой профиль </a></ul>
+            {%else%}
+                <ul ><a href = '/settings_user'> Вход </a></ul>
+                <ul><a href = '/'>Знакомства</a></ul>
+            {% endif %}
+        </div>
+
+    </div>
+    <ul class = 'back'><a data-title="назад" href = '/'> <img src="{% static 'img/free-icon-back-left-arrow-square-button-outline-54921.png' %}" alt="photo"></a></ul>
+
+    <div class = 'user_div'>
+        
+        {% if user_data.id == request.user.setting_user.id%}
+        <div class="form-inner">
+            <ul><img src = '{{user_data.image.url}}'></ul>
+            <ul>Имя: {{ user_data.username }} </ul>
+            <ul>Фамилия: {{ user_data.last_name }} </ul>
+            <ul>Возвраст: {{ user_data.age }} </ul>
+            <ul>Пол: {{ user_data.floor }} </ul>
+            <ul>Город: {{ user_data.sity }} </ul>
+            <ul>О себе: {{ user_data.about }} </ul>
+            <ul><a href = '/{{user_data.id}}/user_like'>Лайки: {{like}}</a></ul>
+            
+                <form method = 'GET' action = '{% url 'text' user_data.id %}'>
+                    {% csrf_token %}
+                    <ul><button>Написать</button></ul>
+                </form>
+                <form method = 'POST'>
+                    {% csrf_token %}
+                    <input type="hidden" name ='image_like' value='{{user_data.id}}'>
+                    <input type="hidden" name ='user_like_prof' value='{{request.user.setting_user.id}}'>                                
+                    <ul><button type = 'submit' name = 'likes' value=1>Like</button></ul>
+                </form>
+             
+        </div>
+            <ul><input type="button" onclick="history.back();" value="Пред. страница"/></ul>
+        {% else %}
+        <div class="form-inner">
+            <ul><img src = '{{user_data.image.url}}'></ul>
+            <ul>Имя: {{ user_data.username }} </ul>
+            <ul>Фамилия: {{ user_data.last_name }} </ul>
+            <ul>Возвраст: {{ user_data.age }} </ul>
+            <ul>Пол: {{ user_data.floor }} </ul>
+            <ul>Город: {{ user_data.sity }} </ul>
+            <ul>О себе: {{ user_data.about }} </ul>
+            <ul>Лайки: {{like}}</ul>
+            
+                <form method = 'GET' action = '{% url 'text' user_data.id %}'>
+                    {% csrf_token %}
+                    <ul><button>Написать</button></ul>
+                </form>
+             
+                <form method = 'POST'>
+                    {% csrf_token %}
+                    <input type="hidden" name ='image_like' value='{{user_data.id}}'>
+                    <input type="hidden" name ='user_like_prof' value='{{request.user.setting_user.user_id}}'>                                
+                    <ul><button type = 'submit' name = 'likes' value=1>Like</button></ul>
+                </form>
+            
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

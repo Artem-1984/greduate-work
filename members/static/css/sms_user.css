@@ -1,0 +1,123 @@
+*{
+    padding: 0;
+    margin: 0;
+    color: rgb( 128, 128, 128);
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+ul>button{
+    background-color: white;
+    border: solid 0px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
+ul>button:hover::after {
+    content: attr(data-title);
+    border: solid 1px;
+
+}
+ .top_blok{
+    width: 100%;
+    background-color: rgb(38,	37,	45);
+    height: 100px;
+    text-align: center;
+    border-bottom: solid 1px;
+}
+.text_top_block{
+    display: flex;
+    justify-content:space-between;
+    padding-top: 50px;
+    margin-left: 55px;
+    margin-right: 110px;
+
+}
+img{
+    height: 25px;
+    width: 25px;
+
+}
+.top{
+    text-align: center;
+    border-bottom: solid 1px ;
+}
+.top>ul>img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.sms{
+    display: block;
+
+
+
+}
+.sms_text {
+    padding: 50px;
+ }
+.sms_text ul{
+    display: block;
+    text-align: center;
+    width: 100%;
+    flex:1;
+    margin-bottom: 60px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    background: #E9EFF6;
+    line-height: 40px;
+    border-width: 0;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+.btn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+
+
+
+}
+.btn>form input, .btn>form button {
+    width: 70%;
+    margin-bottom: 10px;
+    background: #d8dce0;
+    line-height: 40px;
+    border-width: 0;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+    margin-right: 10px;
+    font-size: 16px;
+
+
+}
+.btn>form button{
+
+    width: 10%;
+    background:rgb(38,	37,	45);;
+    border-bottom: 4px solid rgb(52, 52, 56);;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    position: fixed;
+
+}
+.sms_text>ul>form>button{
+
+
+    border: solid 0px;
+    background-color: #E9EFF6;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 5px;
+
+}
+.sms_text>ul>form>button:hover::after {
+    content: attr(data-title);
+    border: solid 1px;
+}
